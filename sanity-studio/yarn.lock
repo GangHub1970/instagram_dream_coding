@@ -2009,7 +2009,7 @@
     "@sanity/client" "^6.15.11"
     "@types/react" "^18.0.25"
 
-"@sanity/types@3.48.1":
+"@sanity/types@3.48.1", "@sanity/types@^3.48.1":
   version "3.48.1"
   resolved "https://registry.yarnpkg.com/@sanity/types/-/types-3.48.1.tgz#377f9a3f678d0b36ecb9d5c399a96b6ac51b11df"
   integrity sha512-UG+AjRPYhh+URH5pBrIQ4h81rRbVZ+J/WLL+vP9uL/bseq61etWIYz8iljXWuReVHbqBPLGHQF1EpcMX1EZ5MQ==
