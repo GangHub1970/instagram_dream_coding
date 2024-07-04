@@ -1,0 +1,54 @@
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import HomeIcon from "./ui/icons/HomeIcon";
+import HomeFillIcon from "./ui/icons/HomeFillIcon";
+import SearchIcon from "./ui/icons/SearchIcon";
+import SearchFillIcon from "./ui/icons/SearchFillIcon";
+import NewIcon from "./ui/icons/NewIcon";
+import NewFillIcon from "./ui/icons/NewFillIcon";
+import ColorButton from "./ui/ColorButton";
+
+const menus = [
+  {
+    href: "/",
+    icon: <HomeIcon />,
+    clickedIcon: <HomeFillIcon />,
+  },
+  {
+    href: "/search",
+    icon: <SearchIcon />,
+    clickedIcon: <SearchFillIcon />,
+  },
+  {
+    href: "/new",
+    icon: <NewIcon />,
+    clickedIcon: <NewFillIcon />,
+  },
+];
+
+export default function Header() {
+  const pathname = usePathname();
+
+  return (
+    <header className="sticky top-0 flex justify-between items-center p-4 border-b border-gray-300 bg-white z-50">
+      <Link href="/" className="text-2xl font-bold">
+        <h1>Instagram</h1>
+      </Link>
+      <nav>
+        <ul className="flex gap-4">
+          {menus.map((menu) => (
+            <li key={menu.href}>
+              <Link href={menu.href}>
+                {pathname === menu.href ? menu.clickedIcon : menu.icon}
+              </Link>
+            </li>
+          ))}
+          <ColorButton text="Sign in" onClick={() => {}} />
+        </ul>
+      </nav>
+    </header>
+  );
+}
