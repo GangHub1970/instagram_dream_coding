@@ -31,8 +31,7 @@ const menus = [
 ];
 
 export default function Header() {
-  const { data: session, status } = useSession();
-  console.log(status);
+  const { data: session } = useSession();
   const pathname = usePathname();
 
   return (
@@ -50,9 +49,9 @@ export default function Header() {
             </li>
           ))}
           {session ? (
-            <ColorButton text="Log out" onClick={() => signOut()} />
+            <ColorButton text="Log out" onClick={signOut} />
           ) : (
-            <ColorButton text="Sign in" onClick={() => signIn()} />
+            <ColorButton text="Sign in" onClick={signIn} />
           )}
         </ul>
       </nav>
