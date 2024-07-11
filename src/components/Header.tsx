@@ -11,6 +11,7 @@ import NewIcon from "./ui/icons/NewIcon";
 import NewFillIcon from "./ui/icons/NewFillIcon";
 import { signIn, signOut, useSession } from "next-auth/react";
 import ColorButton from "./ui/ColorButton";
+import Avatar from "./Avatar";
 
 const menus = [
   {
@@ -40,7 +41,7 @@ export default function Header() {
         <h1>Instagram</h1>
       </Link>
       <nav>
-        <ul className="flex gap-4">
+        <ul className="flex items-center gap-4">
           {menus.map((menu) => (
             <li key={menu.href}>
               <Link href={menu.href}>
@@ -48,11 +49,20 @@ export default function Header() {
               </Link>
             </li>
           ))}
-          {session ? (
-            <ColorButton text="Log out" onClick={signOut} />
-          ) : (
-            <ColorButton text="Sign in" onClick={signIn} />
+          {session && (
+            <li>
+              <Link href={`/user/${session?.user.username}`}>
+                <Avatar imageUrl={session?.user.image} />
+              </Link>
+            </li>
           )}
+          <li>
+            {session ? (
+              <ColorButton text="Log out" onClick={signOut} />
+            ) : (
+              <ColorButton text="Sign in" onClick={signIn} />
+            )}
+          </li>
         </ul>
       </nav>
     </header>
