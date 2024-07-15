@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import { Provider } from "next-auth/providers";
 import Google from "next-auth/providers/google";
+import { addUser } from "./services/user";
 
 export type ProviderData = {
   id: string;
@@ -24,6 +25,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     signIn: "/signin",
   },
   callbacks: {
+    async signIn({ user: { name, email, image }, profile }) {
+      if (!email) return false;
+
+      addUser({
+        id: profile?.sub ?? email.split("@")[0],
+        name: name || "",
+        email,
+        username: email.split("@")[0],
+        image,
+      });
+      return true;
+    },
     async session({ session }) {
       const user = session?.user;
       if (user) {
