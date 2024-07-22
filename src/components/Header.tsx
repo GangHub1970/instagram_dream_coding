@@ -52,7 +52,7 @@ export default function Header() {
           {session && (
             <li>
               <Link href={`/user/${session?.user.username}`}>
-                <Avatar imageUrl={session?.user.image} />
+                <Avatar imageUrl={session?.user.image} size="small" highlight />
               </Link>
             </li>
           )}
