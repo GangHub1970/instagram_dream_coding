@@ -14,7 +14,9 @@ export default function Avatar({
   return (
     <div className={getContainerStyle(size, highlight)}>
       <img
-        className={`rounded-full bg-white ${getImageSizeStyle(size)}`}
+        className={`w-full h-full rounded-full bg-white object-cover ${getImageSizeStyle(
+          size
+        )}`}
         src={imageUrl ?? undefined}
         alt="user profile"
         referrerPolicy="no-referrer"
@@ -25,16 +27,15 @@ export default function Avatar({
 
 function getContainerStyle(size: string, highlight: boolean): string {
   const baseStyle = "flex justify-center items-center rounded-full";
-  const sizeStyle = size === "small" ? "w-9 h-9" : "w-[68px] h-[68px]";
+  const sizeStyle =
+    size === "small" ? "p-[2px] w-9 h-9" : "p-1 w-[68px] h-[68px]";
   const highlightStyle = highlight
-    ? "p-1 bg-gradient-to-bl from-fuchsia-600 via-rose-500 to-amber-300"
+    ? "bg-gradient-to-bl from-fuchsia-600 via-rose-500 to-amber-300"
     : "";
 
   return `${baseStyle} ${sizeStyle} ${highlightStyle}`;
 }
 
 function getImageSizeStyle(size: string): string {
-  return size === "small"
-    ? "w-[28px] h-[28px] p-[0.1rem]"
-    : "w-15 h-15 p-[0.2rem]";
+  return size === "small" ? "p-[0.1rem]" : "p-[0.2rem]";
 }
