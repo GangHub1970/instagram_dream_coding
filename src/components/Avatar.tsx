@@ -1,8 +1,10 @@
 import React from "react";
 
+type AvatarSize = "small" | "medium" | "large";
+
 type Props = {
   imageUrl?: string | null;
-  size?: "small" | "large";
+  size?: AvatarSize;
   highlight?: boolean;
 };
 
@@ -25,10 +27,9 @@ export default function Avatar({
   );
 }
 
-function getContainerStyle(size: string, highlight: boolean): string {
+function getContainerStyle(size: AvatarSize, highlight: boolean): string {
   const baseStyle = "flex justify-center items-center rounded-full";
-  const sizeStyle =
-    size === "small" ? "p-[2px] w-9 h-9" : "p-1 w-[68px] h-[68px]";
+  const sizeStyle = getContainerSize(size);
   const highlightStyle = highlight
     ? "bg-gradient-to-bl from-fuchsia-600 via-rose-500 to-amber-300"
     : "";
@@ -36,6 +37,24 @@ function getContainerStyle(size: string, highlight: boolean): string {
   return `${baseStyle} ${sizeStyle} ${highlightStyle}`;
 }
 
-function getImageSizeStyle(size: string): string {
-  return size === "small" ? "p-[0.1rem]" : "p-[0.2rem]";
+function getContainerSize(size: AvatarSize): string {
+  switch (size) {
+    case "small":
+      return "p-[2px] w-9 h-9";
+    case "medium":
+      return "p-[2px] w-11 h-11";
+    case "large":
+      return "p-1 w-[68px] h-[68px]";
+  }
+}
+
+function getImageSizeStyle(size: AvatarSize): string {
+  switch (size) {
+    case "small":
+      return "p-[0.1rem]";
+    case "medium":
+      return "p-[0.15rem]";
+    case "large":
+      return "p-[0.2rem]";
+  }
 }
