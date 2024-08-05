@@ -22,10 +22,11 @@ export default async function RootLayout({
       <body className={sans.className}>
         <AuthContext>
           <Header />
-          <main className="flex justify-center w-full min-h-full bg-neutral-50">
+          <main className="flex justify-center w-full min-h-full">
             <SWRConfigContext>{children}</SWRConfigContext>
           </main>
         </AuthContext>
+        <div id="portal" />
       </body>
     </html>
   );
