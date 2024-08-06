@@ -5,10 +5,15 @@ export type User = {
   image?: string;
 };
 
-export type SimpleUser = Pick<User, 'image' | 'username'>
+export type SimpleUser = Pick<User, "image" | "username">;
 
 export type DetailUser = User & {
-  following: SimpleUser[],
-  followers: SimpleUser[],
-  bookmarks: string[]
-}
+  following: SimpleUser[];
+  followers: SimpleUser[];
+  bookmarks: string[];
+};
+
+export type UserSearchResult = User & {
+  following: number;
+  followers: number;
+};
