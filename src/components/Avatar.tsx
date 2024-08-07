@@ -1,6 +1,6 @@
 import React from "react";
 
-type AvatarSize = "small" | "medium" | "large";
+type AvatarSize = "small" | "medium" | "large" | "xlarge";
 
 type Props = {
   imageUrl?: string | null;
@@ -16,9 +16,9 @@ export default function Avatar({
   return (
     <div className={getContainerStyle(size, highlight)}>
       <img
-        className={`w-full h-full rounded-full bg-white object-cover ${getImageSizeStyle(
-          size
-        )}`}
+        className={`w-full h-full rounded-full bg-white object-cover ${
+          getImageSizeStyle(size).image
+        }`}
         src={imageUrl ?? undefined}
         alt="user profile"
         referrerPolicy="no-referrer"
@@ -29,32 +29,30 @@ export default function Avatar({
 
 function getContainerStyle(size: AvatarSize, highlight: boolean): string {
   const baseStyle = "flex justify-center items-center rounded-full";
-  const sizeStyle = getContainerSize(size);
+  const { container } = getImageSizeStyle(size);
   const highlightStyle = highlight
     ? "bg-gradient-to-bl from-fuchsia-600 via-rose-500 to-amber-300"
     : "";
 
-  return `${baseStyle} ${sizeStyle} ${highlightStyle}`;
+  return `${baseStyle} ${container} ${highlightStyle}`;
 }
 
-function getContainerSize(size: AvatarSize): string {
-  switch (size) {
-    case "small":
-      return "p-[2px] w-9 h-9";
-    case "medium":
-      return "p-[2px] w-11 h-11";
-    case "large":
-      return "p-1 w-[68px] h-[68px]";
-  }
-}
+type ImageSizeStyle = {
+  container: string;
+  image: string;
+};
 
-function getImageSizeStyle(size: AvatarSize): string {
+function getImageSizeStyle(size: AvatarSize): ImageSizeStyle {
   switch (size) {
     case "small":
-      return "p-[0.1rem]";
+      return { container: "p-[2px] w-9 h-9", image: "p-[0.1rem]" };
     case "medium":
-      return "p-[0.15rem]";
+      return { container: "p-[2px] w-11 h-11", image: "p-[0.15rem]" };
     case "large":
-      return "p-[0.2rem]";
+      return { container: "p-[3px] w-[68px] h-[68px]", image: "p-[0.2rem]" };
+    case "xlarge":
+      return { container: "p-1 w-[142px] h-[142px]", image: "p-1" };
+    default:
+      throw new Error(`Unsupported type size: ${size}`);
   }
 }
