@@ -8,7 +8,7 @@ type Context = {
   };
 };
 
-export async function GET(request: NextRequest, context: Context) {
+export async function GET(_: NextRequest, context: Context) {
   const session = await auth();
   const user = session?.user;
 
