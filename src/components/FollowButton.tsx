@@ -1,10 +1,9 @@
 "use client";
 
-import { HomeUser, ProfileUser } from "@/model/user";
+import { ProfileUser } from "@/model/user";
 import React from "react";
-import useSWR from "swr";
 import Button from "./ui/Button";
-import { useSession } from "next-auth/react";
+import useMe from "@/hooks/me";
 
 type Props = {
   user: ProfileUser;
@@ -12,8 +11,7 @@ type Props = {
 
 export default function FollowButton({ user }: Props) {
   const { username } = user;
-  const { data: session } = useSession();
-  const { data: loggedInUser } = useSWR<HomeUser>(session ? "/api/me" : null);
+  const { user: loggedInUser } = useMe();
 
   const showButton = loggedInUser && loggedInUser.username !== username;
   const following =
