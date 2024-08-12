@@ -25,11 +25,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     signIn: "/signin",
   },
   callbacks: {
-    async signIn({ user: { name, email, image }, profile }) {
+    async signIn({ user: { id, name, email, image } }) {
       if (!email) return false;
 
       addUser({
-        id: profile?.sub ?? email.split("@")[0],
+        id: id as string,
         name: name || "",
         email,
         username: email.split("@")[0],
@@ -37,15 +37,22 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       });
       return true;
     },
-    async session({ session }) {
+    async session({ session, token }) {
       const user = session?.user;
       if (user) {
         session.user = {
           ...user,
           username: user.email?.split("@")[0] || "",
+          id: token.id as string,
         };
       }
       return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
     },
   },
 });
