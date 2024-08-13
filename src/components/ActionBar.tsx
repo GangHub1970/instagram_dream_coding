@@ -7,17 +7,19 @@ import { parseDate } from "@/util/date";
 import ToggleButton from "./ui/ToggleButton";
 import HeartFillIcon from "./ui/icons/HeartFillIcon";
 import BookmarkFIllIcon from "./ui/icons/BookmarkFIllIcon";
-import { SimplePost } from "@/model/post";
+import { Comment, SimplePost } from "@/model/post";
 import usePosts from "@/hooks/posts";
 import useMe from "@/hooks/me";
+import CommentForm from "./CommentForm";
 
 type Props = {
   post: SimplePost;
+  onPostComment: (comment: Comment) => void;
   children?: React.ReactNode;
 };
 
-export default function ActionBar({ post, children }: Props) {
-  const { id, likes, username, text, createdAt, comments } = post;
+export default function ActionBar({ post, onPostComment, children }: Props) {
+  const { id, likes, createdAt } = post;
   const { setLike } = usePosts();
   const { user, setBookmark } = useMe();
   const liked = user ? likes.includes(user.username) : false;
@@ -29,6 +31,9 @@ export default function ActionBar({ post, children }: Props) {
   const handleBookmark = (bookmark: boolean) => {
     user && setBookmark(id, bookmark);
   };
+  const handleComment = (comment: string) => {
+    user && onPostComment({comment, username: user.username, image: user.image})
+  }
   return (
     <>
       <div className="flex justify-between my-2 px-4">
@@ -54,6 +59,7 @@ export default function ActionBar({ post, children }: Props) {
           {parseDate(createdAt)}
         </p>
       </div>
+      <CommentForm onPostComment={handleComment} />
     </>
   );
 }
