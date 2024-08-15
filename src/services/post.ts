@@ -49,7 +49,11 @@ export async function getPostsOf(username: string) {
       `*[_type == "post" && author->username == "${username}"]
       | order(_createdAt desc)
       {${simplePostProjection}}
-    `
+    `,
+      {},
+      {
+        cache: "no-cache",
+      }
     )
     .then(mapPosts);
 }
