@@ -18,16 +18,19 @@ const menus = [
     href: "/",
     icon: <HomeIcon />,
     clickedIcon: <HomeFillIcon />,
+    title: "Home",
   },
   {
     href: "/search",
     icon: <SearchIcon />,
     clickedIcon: <SearchFillIcon />,
+    title: "Search users",
   },
   {
     href: "/new",
     icon: <NewIcon />,
     clickedIcon: <NewFillIcon />,
+    title: "New post",
   },
 ];
 
@@ -37,7 +40,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 flex justify-between items-center p-4 border-b border-gray-300 bg-white z-50">
-      <Link href="/" className="text-2xl font-bold">
+      <Link href="/" className="text-2xl font-bold" aria-label="home">
         <h1>Instagram</h1>
       </Link>
       <nav>

@@ -32,8 +32,9 @@ export default function ActionBar({ post, onPostComment, children }: Props) {
     user && setBookmark(id, bookmark);
   };
   const handleComment = (comment: string) => {
-    user && onPostComment({comment, username: user.username, image: user.image})
-  }
+    user &&
+      onPostComment({ comment, username: user.username, image: user.image });
+  };
   return (
     <>
       <div className="flex justify-between my-2 px-4">
@@ -42,12 +43,14 @@ export default function ActionBar({ post, onPostComment, children }: Props) {
           onToggle={handleLike}
           onIcon={<HeartFillIcon />}
           offIcon={<HeartIcon />}
+          title={liked ? "unlike" : "like"}
         />
         <ToggleButton
           toggled={bookmarked}
           onToggle={handleBookmark}
           onIcon={<BookmarkFIllIcon />}
           offIcon={<BookmarkIcon />}
+          title={bookmarked ? "unbookmark" : "bookmark"}
         />
       </div>
       <div className="px-4 py-1">

@@ -13,9 +13,17 @@ type Props = {
 };
 
 const queies = [
-  { type: "posts", icon: <PostIcon /> },
-  { type: "likes", icon: <HeartIcon className="w-3 h-3" /> },
-  { type: "saved", icon: <BookmarkIcon className="w-3 h-3" /> },
+  { type: "posts", icon: <PostIcon />, title: "User posts" },
+  {
+    type: "likes",
+    icon: <HeartIcon className="w-3 h-3" />,
+    title: "Liked posts",
+  },
+  {
+    type: "saved",
+    icon: <BookmarkIcon className="w-3 h-3" />,
+    title: "Saved posts",
+  },
 ];
 
 export default function UserPosts({ user: { username } }: Props) {
@@ -24,7 +32,7 @@ export default function UserPosts({ user: { username } }: Props) {
   return (
     <section>
       <ul className="flex justify-center uppercase">
-        {queies.map(({ type, icon }) => (
+        {queies.map(({ type, icon, title }) => (
           <li
             key={type}
             onClick={() => setQuery(type)}
@@ -32,7 +40,9 @@ export default function UserPosts({ user: { username } }: Props) {
               type === query && "font-bold border-t"
             }`}
           >
-            <button className="scale-150 md:scale-100">{icon}</button>
+            <button className="scale-150 md:scale-100" aria-label={title}>
+              {icon}
+            </button>
             <span className="hidden md:inline">{type}</span>
           </li>
         ))}
