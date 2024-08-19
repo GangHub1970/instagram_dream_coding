@@ -29,5 +29,5 @@
     "sanity-studio/schemaTypes/user.ts",
     "sanity-studio/schemaTypes/post.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "sanity-studio"]
 }

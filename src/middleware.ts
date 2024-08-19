@@ -4,7 +4,7 @@ import { auth } from "./auth";
 export async function middleware(req: NextRequest) {
   const session = await auth();
   const user = session?.user;
-  console.log(user);
+
   if (!user) {
     if (req.nextUrl.pathname.startsWith("/api")) {
       return new Response("Authentication Error", { status: 401 });
