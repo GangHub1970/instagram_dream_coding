@@ -45,10 +45,10 @@ export default function Header() {
       </Link>
       <nav>
         <ul className="flex items-center gap-4">
-          {menus.map((menu) => (
-            <li key={menu.href}>
-              <Link href={menu.href}>
-                {pathname === menu.href ? menu.clickedIcon : menu.icon}
+          {menus.map(({ href, title, clickedIcon, icon }) => (
+            <li key={href}>
+              <Link href={href} aria-label={title}>
+                {pathname === href ? clickedIcon : icon}
               </Link>
             </li>
           ))}
